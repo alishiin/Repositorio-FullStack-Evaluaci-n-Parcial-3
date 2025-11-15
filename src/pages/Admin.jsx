@@ -22,7 +22,7 @@ export default function Admin() {
 
   const handleAddProduct = async () => {
     if (!newProduct.nombre || !newProduct.precio) {
-      return alert("Completa al menos el nombre y el precio");
+      return alert("Completa al menos el nombre y el precio del producto");
     }
 
     await createProduct(newProduct);

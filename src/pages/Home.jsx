@@ -21,9 +21,7 @@ function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // ------------------------------
-  // Cargar productos desde el backend
-  // ------------------------------
+
   const fetchProducts = async () => {
     try {
       const res = await fetch("http://localhost:8080/api/productos");
