@@ -1,0 +1,77 @@
+/* Cambiando los colores principales */
+
+$primary: #D57A9B;   // Rosa pastel, para botones y elementos principales
+
+$secondary: #F2C1D1;  // Rosa más suave, para fondos o tarjetas
+
+$success: #A3D39C;   // Verde pastel suave, para notificaciones positivas
+
+$danger: #F28C8C;   // Rojo rosado, suave para alertas
+
+$warning: #FFD77A;   // Amarillo pastel, como caramelo
+
+$info: #A3D0E5;    // Azul suave, para info o enlaces
+
+$light: #FFF8F0;    // Crema clara para fondos generales
+
+$dark: #5C3A3A;    // Marrón chocolate, para texto importante
+
+$body-bg: #FFF8F0;   // Fondo general crema
+
+$body-color: #000000; // Texto principal marrón
+
+$nav-link-color: #FFFFFF; // Links en blanco para contraste sobre botones o navbar oscuro
+
+
+
+
+nav {
+
+ color: rgb(132, 76, 126) !important;
+
+}
+
+
+
+/* importando bootstrap */
+
+@import 'bootstrap/scss/bootstrap';
+
+
+
+/* Fuente Pacifico */
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.font-pacifico {
+
+ font-family: 'Pacifico', cursive;
+
+}
+
+
+
+
+body {
+  position: relative;
+  min-height: 100vh;
+
+  
+  background-image: url("/public/chispas.jpg"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: -1;
+}
