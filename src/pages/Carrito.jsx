@@ -31,15 +31,15 @@ function Carrito() {
     const items = cart.map(p =>
       JSON.stringify({
         id: p.id,
-        name: p.name,
-        price: p.price,
-        quantity: 1, // opcional: cantidad
+        nombre: p.nombre,
+        precio: p.precio,
+        quantity: 1,
       })
     );
 
     const order = {
       user: user?.email || "desconocido",
-      total: cart.reduce((acc, p) => acc + Number(p.price), 0),
+      total: cart.reduce((acc, p) => acc + Number(p.precio), 0),
       items: items,
     };
 
@@ -80,7 +80,7 @@ function Carrito() {
   if (cart.length === 0)
     return <h3 className="text-center mt-5">Tu carrito está vacío</h3>;
 
-  const total = cart.reduce((acc, product) => acc + Number(product.price), 0);
+  const total = cart.reduce((acc, product) => acc + Number(product.precio), 0);
 
   return (
     <Container className="my-5">
@@ -89,10 +89,10 @@ function Carrito() {
         {cart.map((product, index) => (
           <Col key={index} xs={12} md={6} lg={4} className="mb-4">
             <Card>
-              <Card.Img variant="top" src={product.image} />
+              <Card.Img variant="top" src={product.imagenUrl} />
               <Card.Body>
-                <Card.Title>{product.name}</Card.Title>
-                <Card.Text>${product.price}</Card.Text>
+                <Card.Title>{product.nombre}</Card.Title>
+                <Card.Text>${product.precio}</Card.Text>
                 <Button
                   variant="danger"
                   className="me-2"
