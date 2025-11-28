@@ -19,7 +19,7 @@ export function useSession() {
       setIsLogged(true);
     } else {
       setUserSession(null);
-      setIsLogged(false);;;;
+      setIsLogged(false);
     }
   }, []);
 
