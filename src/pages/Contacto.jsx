@@ -51,7 +51,7 @@ function Contacto() {
       setSuccess("¡Gracias por contactarnos! Te responderemos pronto.");
       setError("");
 
-      // Reset campos
+    
       setName("");
       setEmail("");
       setSubject("");

@@ -27,7 +27,7 @@ function Carrito() {
       return;
     }
 
-    // Convertimos cada producto en un string JSON
+
     const items = cart.map(p =>
       JSON.stringify({
         id: p.id,

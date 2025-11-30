@@ -9,7 +9,7 @@ import Register from "./Register";
 
 function SignIn() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState(""); // 👈 cambio
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showRegister, setShowRegister] = useState(false);
@@ -53,7 +53,7 @@ function SignIn() {
 
               <Form>
                 <Form.Group controlId="formEmail" className="mb-3">
-                  <Form.Label>Correo electrónico</Form.Label> {/* 👈 cambio */}
+                  <Form.Label>Correo electrónico</Form.Label>
                   <Form.Control
                     type="email"
                     style={{ height: "45px", fontSize: "16px" }}

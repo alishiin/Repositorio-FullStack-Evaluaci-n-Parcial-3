@@ -4,7 +4,7 @@ import LoadingButton from "../components/LoadingButton";
 import { register } from "../services/auth";
 
 function Register({ onSuccess }) {
-  const [email, setEmail] = useState(""); // 👈 cambio aquí
+  const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");

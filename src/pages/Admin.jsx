@@ -11,7 +11,7 @@ export default function Admin() {
     imagenUrl: ""
   });
 
-  // Cargar productos desde API
+  
   useEffect(() => {
     loadProducts();
   }, []);
@@ -47,7 +47,7 @@ export default function Admin() {
     <div className="container mt-4">
       <h1 className="mb-4 text-center">PANEL DE ADMINISTRACIÓN</h1>
 
-      {/* Agregar */}
+
       <div className="card p-3 mb-4 shadow-sm">
         <h4>Agregar nuevo producto</h4>
         <div className="row g-2">
@@ -93,7 +93,7 @@ export default function Admin() {
         </div>
       </div>
 
-      {/* Tabla */}
+
       <table className="table table-striped table-bordered shadow-sm">
         <thead className="table-dark">
           <tr>

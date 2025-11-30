@@ -37,7 +37,7 @@ function ProductDetail() {
       price={product.precio}
       image={product.imagenUrl}
       description={product.descripcion}
-      actionName={null} // si no quieres botón
+      actionName={null}
     />
   );
 }

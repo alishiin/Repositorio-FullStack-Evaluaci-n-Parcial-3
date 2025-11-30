@@ -1,9 +1,9 @@
-// src/services/auth.js
+
 
 const API_URL = "https://full-stack-auth-need.onrender.com";
-const API_KEY = "66a580b5fe24a10542b34269855e915e"; // Tu API_KEY real
+const API_KEY = "66a580b5fe24a10542b34269855e915e";
 
-// ✅ Registrar usuario
+
 export async function register(username, password) {
   const res = await fetch(`${API_URL}/users/`, {
     method: "POST",
@@ -12,7 +12,7 @@ export async function register(username, password) {
       "Authorization": `Bearer ${API_KEY}`,
     },
     body: JSON.stringify({
-      email: username, // La API usa 'email', no 'username'
+      email: username,
       password,
       extraInfo: "registro desde pasteleria react",
     }),
@@ -27,10 +27,10 @@ export async function register(username, password) {
     throw new Error(errorMsg);
   }
 
-  return res.json(); // Devuelve el usuario creado
+  return res.json();
 }
 
-// ✅ Iniciar sesión
+
 export async function signIn(username, password) {
   const res = await fetch(`${API_URL}/users/login`, {
     method: "POST",
@@ -52,27 +52,27 @@ export async function signIn(username, password) {
 
   const data = await res.json();
 
-  // 👇 Detectamos si es el administrador (para ProtectedRoute)
+  
   const isAdmin = data.user.email === "admin@pasteleria.com";
 
   const user = {
     ...data.user,
-    isAdmin, // ✅ esto es lo que ProtectedRoute usa
+    isAdmin, 
   };
 
-  // Guarda token y usuario actual
+  
   localStorage.setItem("auth_token", data.token);
   localStorage.setItem("current_user", JSON.stringify(user));
 
   return user;
 }
 
-// ✅ Obtener usuario actual
+
 export function getCurrentUser() {
   return JSON.parse(localStorage.getItem("current_user"));
 }
 
-// ✅ Cerrar sesión
+
 export function signOut() {
   localStorage.removeItem("auth_token");
   localStorage.removeItem("current_user");

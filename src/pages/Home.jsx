@@ -38,9 +38,7 @@ function Home() {
     fetchProducts();
   }, []);
 
-  // ------------------------------
-  // Agregar al carrito
-  // ------------------------------
+
   const addToCart = (product) => {
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push(product);
@@ -59,7 +57,7 @@ function Home() {
 
   return (
     <>
-      {/* Encabezado */}
+ 
       <div className="text-center my-5">
         <h1
           className="font-pacifico text-4xl md:text-6xl mb-3"
@@ -99,7 +97,7 @@ function Home() {
         </div>
       </div>
 
-      {/* Catálogo */}
+
       <Container className="mt-4">
         <Row className="align-items-stretch">
           {loading ? (
