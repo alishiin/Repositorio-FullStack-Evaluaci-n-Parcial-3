@@ -106,17 +106,15 @@ function Home() {
             <Loading />
           ) : (
             products
-              .filter(
-                (p) =>
-                  !searchParams.get(ROUTE_PARAMS.SEARCH) ||
-                  p.name
-                    .toLowerCase()
-                    .includes(
-                      searchParams
-                        .get(ROUTE_PARAMS.SEARCH)
-                        .toLowerCase()
-                    )
-              )
+              .filter((p) => {
+                const search = searchParams.get(ROUTE_PARAMS.SEARCH)?.toLowerCase() || "";
+                return (
+                  search === "" ||
+                  p.nombre?.toLowerCase().includes(search) ||
+                  p.descripcion?.toLowerCase().includes(search)
+                );
+              })
+
               .map((product) => (
                 <Col key={product.id} xs={12} sm={6} md={4} className="mb-4">
                   <ProductCard
