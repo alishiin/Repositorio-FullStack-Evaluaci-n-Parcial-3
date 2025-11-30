@@ -1,4 +1,3 @@
-// src/pages/Contacto.jsx
 import { useState } from "react";
 import { Container, Row, Col, Form, Button, Alert } from "react-bootstrap";
 import { useSession } from "../hooks/useSession";
@@ -16,7 +15,7 @@ function Contacto() {
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!isLogged) {
@@ -31,13 +30,37 @@ function Contacto() {
       return;
     }
 
-    setError("");
-    setSuccess("¡Gracias por contactarnos! Te responderemos pronto.");
+    try {
+      const response = await fetch("http://localhost:8080/api/contacto", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nombre: name,
+          email: email,
+          asunto: subject,
+          mensaje: message,
+        }),
+      });
 
-    setName("");
-    setEmail("");
-    setSubject("");
-    setMessage("");
+      if (!response.ok) {
+        throw new Error("Error al enviar el mensaje");
+      }
+
+      setSuccess("¡Gracias por contactarnos! Te responderemos pronto.");
+      setError("");
+
+      // Reset campos
+      setName("");
+      setEmail("");
+      setSubject("");
+      setMessage("");
+
+    } catch (err) {
+      setError("No pudimos enviar tu mensaje. Intenta más tarde.");
+      console.error(err);
+    }
   };
 
   return (
