@@ -24,7 +24,7 @@ function Home() {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch("http://localhost:8080/api/productos");
+      const res = await fetch("https://api-productos-pasteleria.onrender.com/api/productos");
       const data = await res.json();
       setProducts(data);
     } catch (error) {
