@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8080/api/productos";
+const API_URL = "https://api-productos-pasteleria.onrender.com/api/productos";
 
 
 export async function getProducts() {

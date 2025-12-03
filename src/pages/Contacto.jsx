@@ -31,7 +31,7 @@ function Contacto() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/api/contacto", {
+      const response = await fetch("https://api-productos-pasteleria.onrender.com/api/contacto", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

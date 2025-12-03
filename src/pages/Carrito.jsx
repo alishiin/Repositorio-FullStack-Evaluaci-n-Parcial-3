@@ -44,7 +44,7 @@ function Carrito() {
     };
 
     try {
-      const res = await fetch("http://localhost:8080/api/ordenes", {
+      const res = await fetch("https://api-productos-pasteleria.onrender.com/api/ordenes", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(order)
