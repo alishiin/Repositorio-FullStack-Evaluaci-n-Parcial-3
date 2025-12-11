@@ -127,7 +127,7 @@ function Layout() {
 
          <NavDropdown 
 
-          title={userSession.username} 
+          title={userSession.username}
 
           id="basic-nav-dropdown"
 
