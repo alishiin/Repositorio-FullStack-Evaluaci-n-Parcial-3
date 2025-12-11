@@ -7,8 +7,9 @@ import { ROUTE_PATHS } from "../utils/constants";
 
 function Carrito() {
   const [cart, setCart] = useState([]);
-  const { isLogged, user } = useSession();
+  const { isLogged, userSession } = useSession();
   const navigate = useNavigate();
+  const [showDenied, setShowDenied] = useState(false);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -19,6 +20,14 @@ function Carrito() {
     if (!isLogged) {
       alert("Debes iniciar sesión para comprar");
       navigate(ROUTE_PATHS.SIGN_IN);
+      return;
+    }
+
+    // Bloquear para admin
+    const isAdmin = userSession?.isAdmin || userSession?.role === 'admin';
+    if (isAdmin) {
+      setShowDenied(true);
+      setTimeout(() => setShowDenied(false), 1800);
       return;
     }
 
@@ -72,6 +81,11 @@ function Carrito() {
           Comprar
         </Button>
       </div>
+      {showDenied && (
+        <div className="admin-denied-toast animate-fade-up" role="status" aria-live="polite">
+          Acción denegada para admin
+        </div>
+      )}
     </Container>
   );
 }

@@ -157,4 +157,45 @@ body {
   font-size: 0.82rem;
 }
 
+/* Toast para acción denegada a admin */
+.admin-denied-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  background: linear-gradient(90deg, #FBCFE8, #F6B8D0);
+  color: #5C3A3A;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(120,60,80,0.12);
+  font-weight: 700;
+  z-index: 9999;
+  transform-origin: bottom right;
+  animation: deniedPop 260ms cubic-bezier(.2,.8,.2,1) both;
+}
 
+/* Toast cuando se agrega producto al carrito */
+.cart-added-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  background: linear-gradient(90deg, #C7F0E3, #A3D39C);
+  color: #3A3A2F;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(100,140,110,0.08);
+  font-weight: 700;
+  z-index: 9999;
+  transform-origin: bottom right;
+  animation: deniedPop 260ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes deniedPop {
+  0% { transform: translateY(10px) scale(0.96); opacity: 0; }
+  60% { transform: translateY(-4px) scale(1.02); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-denied-toast { animation: none !important; }
+  .cart-added-toast { animation: none !important; }
+}

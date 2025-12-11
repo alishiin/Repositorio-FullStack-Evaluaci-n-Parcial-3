@@ -11,7 +11,7 @@ function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState("transferencia");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+  const [showDenied, setShowDenied] = useState(false);
 
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -27,6 +27,13 @@ function Checkout() {
   }, [isLogged, navigate]);
 
   const handleConfirmPurchase = async () => {
+    // Bloquear para admin
+    const isAdmin = userSession?.isAdmin || userSession?.role === 'admin';
+    if (isAdmin) {
+      setShowDenied(true);
+      setTimeout(() => setShowDenied(false), 1800);
+      return;
+    }
     setError("");
     if (cart.length === 0) {
       setError("El carrito está vacío");
@@ -79,7 +86,6 @@ function Checkout() {
       <h2 className="text-center mb-4">Resumen de compra</h2>
 
       {error && <Alert variant="danger">{error}</Alert>}
-      {success && <Alert variant="success">{success}</Alert>}
 
       <Row>
         <Col md={8}>
@@ -146,6 +152,11 @@ function Checkout() {
             <div style={{fontSize:22, fontWeight:800}}>${total}</div>
             <div className="text-muted mt-2">Cliente: {userSession?.email || 'Invitado'}</div>
           </Card>
+          {showDenied && (
+            <div className="admin-denied-toast animate-fade-up" role="status" aria-live="polite">
+              Acción denegada para admin
+            </div>
+          )}
         </Col>
       </Row>
     </Container>

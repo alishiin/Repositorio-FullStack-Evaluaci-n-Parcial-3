@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { Col, Container, Row, Button } from "react-bootstrap";
+import { useSession } from "../hooks/useSession";
 
 import Loading from "../components/Loading";
 
@@ -17,6 +18,10 @@ import { ROUTE_PARAMS } from "../utils/constants";
 function Home() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
+  const { userSession } = useSession();
+
+  const [showDenied, setShowDenied] = useState(false);
+  const [showAdded, setShowAdded] = useState(false);
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,10 +45,21 @@ function Home() {
 
 
   const addToCart = (product) => {
+    // Si es admin, bloquear la acción
+    const isAdmin = userSession?.isAdmin || userSession?.role === 'admin';
+    if (isAdmin) {
+      setShowDenied(true);
+      // ocultar después de 1.8s
+      setTimeout(() => setShowDenied(false), 1800);
+      return;
+    }
+
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`${product.name} agregado al carrito`);
+    // Mostrar toast estandarizado (sin el 'localhost dice ...')
+    setShowAdded(true);
+    setTimeout(() => setShowAdded(false), 1800);
   };
 
   const buttonStyle = {
@@ -126,11 +142,25 @@ function Home() {
                   />
                 </Col>
               ))
-          )}
-        </Row>
-      </Container>
-    </>
-  );
-}
+           )}
+         </Row>
+       </Container>
 
-export default Home;
+      {/* Toast animado para acción denegada a admin */}
+      {showDenied && (
+        <div className="admin-denied-toast animate-fade-up" role="status" aria-live="polite">
+          Acción denegada para admin
+        </div>
+      )}
+
+      {/* Toast estándar al agregar al carrito */}
+      {showAdded && (
+        <div className="cart-added-toast animate-fade-up" role="status" aria-live="polite">
+          Producto agregado al carrito
+        </div>
+      )}
+    </>
+   );
+ }
+
+ export default Home;
