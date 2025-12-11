@@ -34,35 +34,22 @@ nav {
 
 
 /* importando bootstrap */
-
 @import 'bootstrap/scss/bootstrap';
 
+@import './styles/theme.scss';
 
+/* Fonts import - preferible en index.html, pero dejamos referencia segura */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
 
-/* Fuente Pacifico */
-
-@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-
-.font-pacifico {
-
- font-family: 'Pacifico', cursive;
-
-}
-
-
-
-
+/* Fondo sutil de la app: se mantiene imagen pero con overlay para mejor lectura */
 body {
   position: relative;
   min-height: 100vh;
-
-  
-  background-image: url("/public/chispas.jpg"); 
+  background-image: url("/public/chispas.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-
 
 body::before {
   content: "";
@@ -71,7 +58,6 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.82), rgba(255,255,255,0.88));
   z-index: -1;
 }

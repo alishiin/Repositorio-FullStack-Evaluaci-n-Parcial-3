@@ -27,47 +27,8 @@ function Carrito() {
       return;
     }
 
-
-    const items = cart.map(p =>
-      JSON.stringify({
-        id: p.id,
-        nombre: p.nombre,
-        precio: p.precio,
-        quantity: 1,
-      })
-    );
-
-    const order = {
-      user: user?.email || "desconocido",
-      total: cart.reduce((acc, p) => acc + Number(p.precio), 0),
-      items: items,
-    };
-
-    try {
-      const res = await fetch("https://api-productos-pasteleria.onrender.com/api/ordenes", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(order)
-      });
-
-      if (!res.ok) {
-        const text = await res.text();
-        console.error("Error creando orden:", res.status, text);
-        alert("Error al procesar la compra: " + text);
-        return;
-      }
-
-      const data = await res.json();
-      console.log("Orden creada:", data);
-      alert("Compra realizada con éxito");
-
-      localStorage.removeItem("cart");
-      setCart([]);
-
-    } catch (error) {
-      console.error("Error en la solicitud:", error);
-      alert("Error al procesar la compra");
-    }
+    // Redirigir a la página de checkout para completar la compra
+    navigate(ROUTE_PATHS.CHECKOUT);
   };
 
   const handleRemove = (index) => {

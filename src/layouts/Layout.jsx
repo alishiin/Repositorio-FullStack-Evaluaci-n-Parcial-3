@@ -135,6 +135,9 @@ function Layout() {
 
          >
 
+          {/* Nuevo enlace a la página de perfil del usuario */}
+          <NavDropdown.Item as={NavLink} to="/profile">Mi perfil</NavDropdown.Item>
+
           {userSession.isAdmin && (
 
            <NavDropdown.Item as={NavLink} to="/admin">

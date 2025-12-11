@@ -7,6 +7,9 @@ import Contacto from './pages/Contacto';
 import Carrito from './pages/Carrito';
 import Layout from './layouts/Layout';
 import Admin from './pages/Admin';
+import Profile from './pages/Profile';
+import Checkout from './pages/Checkout';
+import OrderSuccess from './pages/OrderSuccess';
 import { ROUTE_PATHS } from './utils/constants';
 import ProtectedRoute from './pages/ProtectedRoute';
 import './App.scss';
@@ -26,6 +29,9 @@ function App() {
             <Route path="/nosotros" element={<Nosotros />} />
             <Route path="/contacto" element={<Contacto />} />
             <Route path="/carrito" element={<Carrito />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path={ROUTE_PATHS.CHECKOUT} element={<Checkout />} />
+            <Route path={ROUTE_PATHS.ORDER_SUCCESS} element={<OrderSuccess />} />
 
 
             <Route
