@@ -195,7 +195,49 @@ body {
   100% { transform: translateY(0) scale(1); opacity: 1; }
 }
 
+/* RECOMMENDATIONS / CARRUSEL */
+.reco-section { padding-bottom: 36px; }
+.reco-header .reco-subtext { font-size: 0.95rem; }
+.reco-carousel { overflow: hidden; }
+.carousel-frame { min-height: 260px; display: grid; place-items: center; }
+.carousel-image { max-width: 100%; max-height: 260px; object-fit: cover; border-radius: 10px; transition: transform 320ms ease; }
+.carousel-control { background: rgba(255,255,255,0.95); border: none; width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 8px 22px rgba(30,40,20,0.06); font-size: 22px; display: grid; place-items: center; cursor: pointer; }
+.carousel-control:hover { transform: translateY(-3px); }
+.reco-dot { width:10px; height:10px; border-radius:50%; background: rgba(120,90,100,0.18); border:none; }
+.reco-dot.active { background: linear-gradient(90deg, #A3D39C, #F6B8D0); box-shadow: 0 6px 18px rgba(90,40,60,0.06); }
+
+/* Christmas button special */
+.christmas-btn { background: linear-gradient(90deg, #2ECC71, #27AE60); color: #fff; border: none; }
+.christmas-btn:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(40,120,60,0.16); }
+
+/* MARQUEE-LIKE RECTANGLE (texto que viene y va) */
+.marquee-rect {
+  width: 100%;
+  overflow: hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom: 8px;
+}
+.marquee-inner {
+  white-space: nowrap;
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(90deg, rgba(255,245,240,0.9), rgba(255,238,245,0.95));
+  border-radius: 8px;
+  color: #5C3A3A;
+  font-weight: 700;
+  box-shadow: 0 8px 30px rgba(150,70,100,0.06);
+  animation: marqueeMove 6s linear infinite;
+}
+@keyframes marqueeMove {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0%); }
+  100% { transform: translateX(100%); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .admin-denied-toast { animation: none !important; }
   .cart-added-toast { animation: none !important; }
+  .marquee-inner { animation: none !important; }
 }
