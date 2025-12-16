@@ -123,7 +123,7 @@ function Checkout() {
                   <div className="mt-3">
                     <div className="mb-2">Realiza la transferencia a:</div>
                     <div className="p-3" style={{background:'#fff7f9', borderRadius:8}}>
-                      <div><strong>Banco:</strong> Banco Fantasía</div>
+                      <div><strong>Banco:</strong> Banco Momo&Virgo</div>
                       <div><strong>Cuenta:</strong> 123456789</div>
                       <div><strong>Rut:</strong> 12.345.678-9</div>
                     </div>
@@ -132,7 +132,7 @@ function Checkout() {
 
                 {paymentMethod === 'webpay' && (
                   <div className="mt-3">
-                    <div className="mb-2">Al seleccionar WebPay serás redirigido al checkout seguro (simulado).</div>
+                    <div className="mb-2">Al seleccionar WebPay serás redirigido al checkout seguro.</div>
                   </div>
                 )}
 
