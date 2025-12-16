@@ -236,8 +236,50 @@ body {
   100% { transform: translateX(100%); }
 }
 
+/* Ribbon navideña encima del título */
+.holiday-ribbon {
+  display:flex;
+  justify-content:center;
+  margin-top: 18px;
+  overflow: hidden; /* ocultar el desbordamiento mientras se anima */
+  padding: 6px 0;
+  z-index: 2;
+}
+
+/* Pista que se desplaza; contenido duplicado en el JSX para loop sin huecos */
+.holiday-ribbon-track {
+  display: inline-flex;
+  gap: 0; /* sin espacio entre items para evitar huecos */
+  align-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: ribbonMove 16s linear infinite;
+}
+
+.holiday-ribbon-item {
+  background: linear-gradient(90deg, #27AE60, #2ECC71);
+  color: #fff;
+  font-weight: 700;
+  padding: 8px 28px;
+  /* quitar border-radius para que las piezas se junten sin espacios */
+  border-radius: 0;
+  box-shadow: none; /* eliminar sombra para continuidad */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 260px;
+  text-align: center;
+}
+
+@keyframes ribbonMove {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 576px) {
+  .holiday-ribbon-item { padding: 6px 12px; font-size: 0.9rem; min-width: 160px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .admin-denied-toast { animation: none !important; }
-  .cart-added-toast { animation: none !important; }
-  .marquee-inner { animation: none !important; }
+  .holiday-ribbon-track { animation: none !important; transform: none !important; }
 }

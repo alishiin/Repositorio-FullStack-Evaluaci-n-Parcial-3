@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useSession } from "../hooks/useSession";
@@ -6,12 +6,34 @@ import { useSession } from "../hooks/useSession";
 function Profile() {
   const { isLogged, userSession } = useSession();
   const navigate = useNavigate();
+  const [showDenied, setShowDenied] = useState(false);
 
   useEffect(() => {
     if (!isLogged) navigate("/signin");
   }, [isLogged, navigate]);
 
   if (!isLogged || !userSession) return null; // evitar render si no está listo
+
+  // Si es admin, impedir acceso: mostrar pequeño toast y redirigir al home
+  if (userSession?.isAdmin || userSession?.role === "admin") {
+    // mostrar notificación breve
+    if (!showDenied) {
+      setShowDenied(true);
+      setTimeout(() => {
+        setShowDenied(false);
+        navigate("/");
+      }, 1400);
+    }
+    return (
+      <div>
+        {showDenied && (
+          <div className="admin-denied-toast animate-fade-up" role="status" aria-live="polite">
+            Acceso denegado para admin
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <Container className="profile-page">
@@ -29,21 +51,15 @@ function Profile() {
                 </div>
                 <div>
                   <h2 className="mb-1">{userSession.username}</h2>
-                  <div className="text-muted">Miembro desde: {userSession.createdAt || "-"}</div>
+                  <div className="text-muted">Miembro desde: {userSession.createdAt || "2025"}</div>
                 </div>
               </div>
 
               <Row>
                 <Col xs={12} className="mb-3">
                   <h5>Información personal</h5>
-                  <div className="profile-field"><strong>Nombre:</strong> {userSession.name || "-"}</div>
+                  <div className="profile-field"><strong>Nombre:</strong> {userSession.name || "juanito"}</div>
                   <div className="profile-field"><strong>Correo:</strong> {userSession.email || "-"}</div>
-                  <div className="profile-field"><strong>Teléfono:</strong> {userSession.phone || "-"}</div>
-                </Col>
-
-                <Col xs={12} className="mb-3">
-                  <h5>Dirección</h5>
-                  <div className="profile-field">{userSession.address || "No registrada"}</div>
                 </Col>
 
                 <Col xs={12} className="d-flex gap-2 justify-content-end">

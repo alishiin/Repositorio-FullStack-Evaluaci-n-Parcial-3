@@ -20,6 +20,10 @@ function Home() {
   const [searchParams] = useSearchParams();
   const { userSession } = useSession();
 
+  // Ribbon dinámico
+  const [ribbonItems, setRibbonItems] = useState([]);
+  const ribbonItemWidth = 260; // debe coincidir con CSS min-width
+
   const [showDenied, setShowDenied] = useState(false);
   const [showAdded, setShowAdded] = useState(false);
 
@@ -46,6 +50,25 @@ function Home() {
 
   useEffect(() => {
     fetchProducts();
+  }, []);
+
+  // construir items de la cinta de forma dinámica para cubrir el ancho de la pantalla
+  useEffect(() => {
+    const build = () => {
+      const vw = window.innerWidth || document.documentElement.clientWidth;
+      // cuantos items únicos necesitamos para cubrir al menos el ancho de la ventana + margen
+      const count = Math.max(4, Math.ceil(vw / ribbonItemWidth) + 3);
+      const base = Array.from({ length: count }, () => ({
+        text: 'Momo&Virgo te desean feliz navidad'
+      }));
+      // duplicar
+      const seq = [...base, ...base];
+      setRibbonItems(seq);
+    };
+
+    build();
+    window.addEventListener('resize', build);
+    return () => window.removeEventListener('resize', build);
   }, []);
 
   // carousel auto-advance
@@ -122,7 +145,25 @@ function Home() {
 
   return (
     <>
- 
+      {/* Cinta navideña animada arriba del título: pista con items dinámicos y duplicados para movimiento sin huecos */}
+      <div className="holiday-ribbon" aria-hidden="true">
+        <div className="holiday-ribbon-track">
+          {ribbonItems.map((item, i) => (
+            <div key={`ribbon-${i}`} className="holiday-ribbon-item">
+              <span className="ribbon-icon" aria-hidden>
+                {/* SVG regalo */}
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                  <path fill="#fff" d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7h16z"/>
+                  <path fill="#2E8B57" d="M12 12V3l3 3h4v3H5V6h4l3-3v9z"/>
+                  <path fill="#fff" d="M7 12h3v5H7zM14 12h3v5h-3z" opacity="0.9" />
+                </svg>
+              </span>
+              <span className="ribbon-text">{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="text-center my-5">
         <h1
           className="font-pacifico text-4xl md:text-6xl mb-3"
